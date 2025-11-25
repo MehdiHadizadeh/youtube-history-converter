@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube History Converter</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="content-wrapper">
+        <div class="main-card">
+          <!-- Header Section -->
+          <div class="header-section">
+            <div class="icon-title">
+              <svg
+                class="file-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                ></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              <h1>YouTube History Converter</h1>
+            </div>
+            <p class="subtitle">
+              Convert your YouTube Watch History HTML file from Google Takeout
+              into clean, structured JSON format. All processing happens in your
+              browser - your data never leaves your device.
+            </p>
+          </div>
+
+          <!-- Upload Section -->
+          <div class="form-section">
+            <label class="form-label">Select HTML File</label>
+            <div class="file-upload-wrapper">
+              <label for="fileInput" class="file-upload-label">
+                <svg
+                  class="upload-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <span id="fileName" class="file-name">Choose file...</span>
+              </label>
+              <input
+                type="file"
+                id="fileInput"
+                accept=".html"
+                class="file-input"
+              />
+            </div>
+          </div>
+
+          <!-- Convert Button -->
+          <button id="convertBtn" class="btn btn-primary" disabled>
+            Convert to JSON
+          </button>
+
+          <!-- Status Messages -->
+          <div id="statusSuccess" class="alert alert-success hidden">
+            <svg
+              class="alert-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span id="successMessage"></span>
+          </div>
+
+          <div id="statusError" class="alert alert-error hidden">
+            <svg
+              class="alert-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <span id="errorMessage"></span>
+          </div>
+
+          <!-- Stats Section -->
+          <div id="stats" class="stats-card hidden">
+            <h3 class="stats-title">Conversion Summary</h3>
+            <div class="stats-grid">
+              <div class="stat-item">
+                <div class="stat-label">Total entries found:</div>
+                <div class="stat-value" id="totalEntries">0</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">Valid "Watched" entries:</div>
+                <div class="stat-value stat-success" id="convertedEntries">
+                  0
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">Skipped (Viewed/Invalid/ADs):</div>
+                <div class="stat-value" id="skippedEntries">0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Download Button -->
+          <button id="downloadBtn" class="btn btn-download hidden">
+            <svg
+              class="btn-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download JSON
+          </button>
+
+          <!-- Instructions Section -->
+          <div class="instructions-card">
+            <h3 class="instructions-title">How to get your data:</h3>
+            <ol class="instructions-list">
+              <li>
+                Go to
+                <a
+                  href="https://takeout.google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >takeout.google.com</a
+                >
+              </li>
+              <li>
+                Deselect all, then select only "YouTube and YouTube Music"
+              </li>
+              <li>
+                Click "Next step" → Choose file format and delivery method
+              </li>
+              <li>Wait for the export (you'll receive an email)</li>
+              <li>Download and extract the ZIP file</li>
+              <li>Find the "watch-history.html" file in the YouTube folder</li>
+              <li>Upload it here to convert to JSON</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+          <p>Open source • Privacy-first • No data uploaded</p>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="src/parser.js"></script>
+  </body>
+</html>

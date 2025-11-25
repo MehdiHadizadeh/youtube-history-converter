@@ -1,0 +1,303 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(to bottom right, #fee2e2, #f3f4f6);
+  min-height: 100vh;
+  padding: 32px;
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  max-width: 672px;
+  width: 100%;
+}
+
+.main-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 32px;
+}
+
+/* Header Section */
+.header-section {
+  margin-bottom: 24px;
+}
+
+.icon-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.file-icon {
+  width: 32px;
+  height: 32px;
+  color: #dc2626;
+  flex-shrink: 0;
+}
+
+.header-section h1 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.subtitle {
+  color: #4b5563;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* Form Section */
+.form-section {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.file-upload-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.file-upload-label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+}
+
+.file-upload-label:hover {
+  border-color: #ef4444;
+}
+
+.upload-icon {
+  width: 20px;
+  height: 20px;
+  color: #9ca3af;
+}
+
+.file-name {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.file-input {
+  display: none;
+}
+
+/* Buttons */
+.btn {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background-color: #dc2626;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #b91c1c;
+}
+
+.btn-primary:disabled {
+  background-color: #d1d5db;
+  cursor: not-allowed;
+}
+
+.btn-download {
+  background-color: #16a34a;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.btn-download:hover {
+  background-color: #15803d;
+}
+
+.btn-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Alert Messages */
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.alert-success {
+  background-color: #dcfce7;
+  border: 1px solid #86efac;
+  color: #166534;
+}
+
+.alert-error {
+  background-color: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+}
+
+.alert-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Stats Card */
+.stats-card {
+  padding: 16px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.stats-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.stats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.stat-label {
+  color: #4b5563;
+}
+
+.stat-value {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.stat-success {
+  color: #16a34a;
+}
+
+/* Instructions Card */
+.instructions-card {
+  padding: 16px;
+  background-color: #dbeafe;
+  border: 1px solid #93c5fd;
+  border-radius: 8px;
+}
+
+.instructions-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e3a8a;
+  margin-bottom: 8px;
+}
+
+.instructions-list {
+  margin-left: 20px;
+  color: #1e40af;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.instructions-list li {
+  margin-bottom: 4px;
+}
+
+.instructions-list a {
+  color: #1e40af;
+  text-decoration: underline;
+}
+
+.instructions-list a:hover {
+  color: #1e3a8a;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.footer p {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+/* Utility Classes */
+.hidden {
+  display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    padding: 16px;
+  }
+
+  .main-card {
+    padding: 24px;
+  }
+
+  .header-section h1 {
+    font-size: 24px;
+  }
+
+  .icon-title {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

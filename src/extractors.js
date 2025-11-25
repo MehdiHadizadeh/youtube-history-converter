@@ -1,5 +1,5 @@
 import { getTextContent, extractLinks, findTextMatch } from "./html-utils.js";
-import { parseYouTubeDate } from "./date-utils.js";
+import { parseYouTubeDate, parsePersianDate } from "./date-utils.js";
 
 export function extractHeader(card) {
   const headerCell = card.querySelector(".header-cell p");
@@ -28,20 +28,36 @@ export function extractSubtitles(contentCell) {
 
 export function extractTime(contentCell) {
   const textContent = getTextContent(contentCell);
-  const datePattern =
+
+  // Try English date format first
+  const englishDatePattern =
     /[A-Z][a-z]+\s+\d+,\s+\d+,\s+\d+:\d+:\d+\s+[AP]M\s+GMT[+-]\d+:\d+/;
-  const timeStr = findTextMatch(textContent, datePattern);
+  const englishTimeStr = findTextMatch(textContent, englishDatePattern);
 
-  if (!timeStr) return null;
+  if (englishTimeStr) {
+    return parseYouTubeDate(englishTimeStr);
+  }
 
-  return parseYouTubeDate(timeStr);
+  // Try Persian date format
+  const persianDatePattern =
+    /[۰-۹]+\s+[\u0600-\u06FF]+\s+[۰-۹]+،\s+[۰-۹]+:[۰-۹]+:[۰-۹]+\s+‎?[+-][۰-۹]+:[۰-۹]+\s+[\u0600-\u06FF]+/;
+  const persianTimeStr = findTextMatch(textContent, persianDatePattern);
+
+  if (persianTimeStr) {
+    return parsePersianDate(persianTimeStr);
+  }
+
+  return null;
 }
 
 export function extractProducts(captionCell) {
   const captionText = getTextContent(captionCell);
   const products = [];
 
-  if (captionText.includes("Products:") && captionText.includes("YouTube")) {
+  if (
+    (captionText.includes("Products:") || captionText.includes("محصولات:")) &&
+    captionText.includes("YouTube")
+  ) {
     products.push("YouTube");
   }
 
@@ -51,8 +67,11 @@ export function extractProducts(captionCell) {
 export function extractActivityControls(captionCell) {
   const captionText = getTextContent(captionCell);
 
-  if (!captionText.includes("From Google Ads")) {
-    return captionText;
+  if (
+    !captionText.includes("From Google Ads") &&
+    !captionText.includes("از Google Ads")
+  ) {
+    return "YouTube watch history";
   }
 
   return "";
@@ -60,7 +79,15 @@ export function extractActivityControls(captionCell) {
 
 export function isWatchedEntry(contentCell) {
   const textContent = getTextContent(contentCell);
-  return textContent.startsWith("Watched");
+  if (textContent.startsWith("Watched")) {
+    return true;
+  }
+
+  if (textContent.includes("تماشا")) {
+    return true;
+  }
+
+  return false;
 }
 
 export function isValidActivityControl(captionCell) {

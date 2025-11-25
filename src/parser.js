@@ -39,16 +39,16 @@ function parseEntry(card) {
     // Skip non-"Watched" entries
     if (!isWatchedEntry(firstContent)) return null;
 
+    const activityControls = extractActivityControls(captionCell);
     // Validate activity controls
-    if (!captionCell || !isValidActivityControl(captionCell)) return null;
+    if (!captionCell || !activityControls) return null;
 
     // Extract all fields
     const header = extractHeader(card);
     const title = extractTitle(firstContent);
     const subtitles = extractSubtitles(firstContent);
-    const time = extractTime(firstContent);
+    const time = extractTime(firstContent);    
     const products = extractProducts(captionCell);
-    const activityControls = extractActivityControls(captionCell);
 
     // Validate required fields
     if (!title || !time) return null;

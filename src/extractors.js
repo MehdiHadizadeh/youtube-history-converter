@@ -29,13 +29,22 @@ export function extractSubtitles(contentCell) {
 export function extractTime(contentCell) {
   const textContent = getTextContent(contentCell);
 
-  // Try English date format first
-  const englishDatePattern =
-    /[A-Z][a-z]+\s+\d+,\s+\d+,\s+\d+:\d+:\d+\s+[AP]M\s+GMT[+-]\d+:\d+/;
-  const englishTimeStr = findTextMatch(textContent, englishDatePattern);
+  // Try English GMT offset format: "Nov 23, 2025, 1:38:42 AM GMT+03:30"
+  const englishGMTPattern =
+    /[A-Z][a-z]+\s+\d+,\s+\d+,\s+\d{1,2}:\d+:\d+\s+[AP]M\s+GMT[+-]\d+:\d+/;
+  const englishGMTStr = findTextMatch(textContent, englishGMTPattern);
 
-  if (englishTimeStr) {
-    return parseYouTubeDate(englishTimeStr);
+  if (englishGMTStr) {
+    return parseYouTubeDate(englishGMTStr);
+  }
+
+  // Try English timezone abbreviation format: "Nov 26, 2025, 2:34:02 PM CET"
+  const englishTZPattern =
+    /[A-Z][a-z]+\s+\d+,\s+\d+,\s+\d{1,2}:\d+:\d+\s+[AP]M\s+[A-Z]{3,5}/;
+  const englishTZStr = findTextMatch(textContent, englishTZPattern);
+
+  if (englishTZStr) {
+    return parseYouTubeDate(englishTZStr);
   }
 
   // Try Persian date format
